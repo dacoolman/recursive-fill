@@ -1,0 +1,27 @@
+body {
+	margin:0px;
+}
+div.row{
+	padding:0px;
+}
+div.row div{
+	display:inline-block;
+	width:20px;
+	height:20px;
+	border:1px solid black;
+}
+div.blue{
+	background-color:blue;
+}
+div.yellow{
+	background-color:yellow;
+}
+div.red{
+	background-color:red;
+}
+div.purple{
+	background-color:purple;
+}
+div.black{
+	background-color:black;
+}
