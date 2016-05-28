@@ -26,9 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	function displayWorld(){
 		var output = '';
 		for (var i=0 ; i<world.length ; i++) {
-			if (i%8 === 0) output += "\n<div class='row'>";
+			var column = i%8;
+			if (column === 0) output += "\n<div class='row'>";
 			output += "\n\t<div class='" + mapping[world[i]] + "'></div>";
-			if (i%8 === 7) output += "\n</div>";
+			if (column === 7) output += "\n</div>";
 		}
 		document.getElementById('world').innerHTML = output;
 	}
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.onclick = function(e) {
 		var x = Math.floor(e.x/26);
 		var y = Math.floor(e.y/26);
-		if (x >= 8 || y >= 8) return;
+		if (x > 7 || y > 7) return;
 		var position = y*8 + x;
 		var colornum = world[position];
 		rfill(position, colornum);
@@ -52,13 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 		return;
 	}
-	//function returns the position of all blocks around the clicked block with the same color
+	//returns the position of all blocks around the clicked block with the same color
 	function checkMatches(position, colornum) {
 		var arr = [];
-		if (world[position + 1] === colornum && position%8 !== 7) arr.push(position + 1);
-		if (world[position - 1] === colornum && position%8 !== 0) arr.push(position - 1);
-		if (world[position + 8] === colornum && Math.floor(position/8) < 7) arr.push(position + 8);
-		if (world[position - 8] === colornum && Math.floor(position/8) > 0) arr.push(position - 8);
+		var row = Math.floor(position/8);
+		var column = position%8;
+		if (world[position + 1] === colornum && column !== 7) arr.push(position + 1);
+		if (world[position - 1] === colornum && column !== 0) arr.push(position - 1);
+		if (world[position + 8] === colornum && row < 7) arr.push(position + 8);
+		if (world[position - 8] === colornum && row > 0) arr.push(position - 8);
 		return arr;
 	}
 });
