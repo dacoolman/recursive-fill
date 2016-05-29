@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-	//Create Div to add blocks to
 	var worldDiv = document.createElement('div');
 	worldDiv.id = 'world';
 	document.getElementsByTagName('body')[0].appendChild(worldDiv);
+
 	var mapping = {
 		0: "white",
 		1: "blue",
@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	document.onclick = function(e) {
-		var x = Math.floor(e.x/26);
-		var y = Math.floor(e.y/26);
+		var x = e.x !==undefined ? Math.floor(e.x/26) : Math.floor(e.clientX/26);
+		var y = e.y !== undefined ? Math.floor(e.y/26) : Math.floor(e.clientY/26);
 		if (x > 7 || y > 7) return;
 		var position = y*8 + x;
 		var colornum = world[position];
